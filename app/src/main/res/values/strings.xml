@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">AppflotqnteFenix</string>
+    <string name="title">TraductorFR</string>
+    <string name="activate_button">💬 Activar chat traductor</string>
+    <string name="close">✕</string>
+    <string name="translate">Traducir</string>
+    <string name="speak">🔊 Leer</string>
+    <string name="paste">📋 Pegar</string>
+    <string name="hint">Pega o escribe aquí...</string>
+    <string name="top_bar">🌐 Traductor</string>
+</resources>
