@@ -12,7 +12,7 @@
         android:id="@+id/tv_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TraductorFR"
+        android:text="@string/title"
         android:textSize="24sp"
         android:textColor="#FFFFFF"
         android:background="#1E1E1E"
@@ -22,7 +22,7 @@
         android:id="@+id/btn_activar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="💬 Activar chat traductor"
+        android:text="@string/activate_button"
         android:background="#2196F3"
         android:textColor="#FFFFFF"
         android:layout_marginTop="16dp" />
