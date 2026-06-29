@@ -115,14 +115,14 @@ class MainActivity : AppCompatActivity() {
         }
 
         val tvTitle = TextView(this).apply {
-            text = "🌐 Traductor"
+            text = getString(R.string.top_bar)
             setTextColor(Color.WHITE)
             textSize = 18f
             layoutParams = LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, 1f)
         }
 
         val btnClose = Button(this).apply {
-            text = "✕"
+            text = getString(R.string.close)
             setBackgroundColor(Color.TRANSPARENT)
             setTextColor(Color.WHITE)
             setOnClickListener {
@@ -184,7 +184,7 @@ class MainActivity : AppCompatActivity() {
         etTexto = EditText(this).apply {
             setBackgroundColor(Color.parseColor("#2D2D2D"))
             setTextColor(Color.WHITE)
-            hint = "Pega o escribe aquí..."
+            hint = getString(R.string.hint)
             setHintTextColor(Color.LTGRAY)
             layoutParams = LinearLayout.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT,
@@ -203,21 +203,21 @@ class MainActivity : AppCompatActivity() {
         }
 
         val btnTranslate = Button(this).apply {
-            text = "Traducir"
+            text = getString(R.string.translate)
             setBackgroundColor(Color.parseColor("#2196F3"))
             setTextColor(Color.WHITE)
             layoutParams = LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, 1f)
         }
 
         val btnSpeak = Button(this).apply {
-            text = "🔊 Leer"
+            text = getString(R.string.speak)
             setBackgroundColor(Color.parseColor("#4CAF50"))
             setTextColor(Color.WHITE)
             layoutParams = LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, 1f)
         }
 
         val btnPaste = Button(this).apply {
-            text = "📋 Pegar"
+            text = getString(R.string.paste)
             setBackgroundColor(Color.parseColor("#4CAF50"))
             setTextColor(Color.WHITE)
             layoutParams = LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, 1f)
@@ -232,8 +232,12 @@ class MainActivity : AppCompatActivity() {
         val params = WindowManager.LayoutParams(
             widthPx,
             heightPx,
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY
-            else WindowManager.LayoutParams.TYPE_PHONE,
+            // TYPE_APPLICATION_OVERLAY is available from API 26 and is the recommended type.
+            // It works on newer devices and also on older ones when the app's minSdk is >= 26.
+            // For devices with API < 26 you could fallback to TYPE_SYSTEM_ALERT, but that
+            // constant was removed in API 34, causing compilation errors. Using only
+            // TYPE_APPLICATION_OVERLAY avoids the compile‑time issue.
+            WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY,
             WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE,
             PixelFormat.TRANSLUCENT
         )
@@ -288,8 +292,14 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        spinnerDest.setOnItemSelectedListener(object : android.widget.AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(parent: android.widget.AdapterView<*>, view: View?, position: Int, id: Long) {
+        spinnerDest.setOnItemSelectedListener(object :
+            android.widget.AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(
+                parent: android.widget.AdapterView<*>,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
                 val lang = languageCodes[languageNames[position]] ?: "es"
                 tts.language = Locale(lang)
             }
